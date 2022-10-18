@@ -73,11 +73,13 @@
 		</article>
 		@endforeach
 		</aside>
+		@if (isset($$bannerAds[2]))
 		<aside class="aside-item blog-banner margin-top-30">
 		<a href="{{$bannerAds[2]->name}}" title="" class="single_image_effect">
 		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{$bannerAds[2]->image}}" alt="" class="lazy img-responsive mx-auto d-block" loading="lazy" />
 		</a>
 		</aside>
+		@endif
 	</aside>
 	</div>
 </div>
