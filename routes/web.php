@@ -75,9 +75,9 @@ Route::group(['namespace'=>'Client','middleware' => ['checkLanguage']], function
     });
 
     Route::get('tat-ca-san-pham.html','ProductController@allProduct')->name('allProduct');
-    Route::get('{cate}/{slug}.html','ProductController@detail_product')->name('detailProduct');
-    Route::get('{cate}.html','ProductController@allListCate')->name('allListProCate');
-    Route::get('{cate}/{typeCate}.html','ProductController@allListType')->name('allListProType');
+    Route::get('detail/{cate}/{slug}.html','ProductController@detail_product')->name('detailProduct');
+    Route::get('category/{cate}.html','ProductController@allListCate')->name('allListProCate');
+    Route::get('category/{cate}/{typeCate}.html','ProductController@allListType')->name('allListProType');
     Route::get('{cate}/{typeCate}/{typeTwo}.html','ProductController@allListTypeTwo')->name('allListTypeTwo');
     Route::post('san-pham/filter','ProductController@filterProduct')->name('filterProduct');
 
