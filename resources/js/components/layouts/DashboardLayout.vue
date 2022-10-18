@@ -172,9 +172,13 @@ export default {
               path: "/banner",
             },
             {
-              name: "Quản lý đối tác",
-              path: "/partner",
+              name: "Banner quảng cáo",
+              path: "/bannerads",
             },
+            // {
+            //   name: "Quản lý đối tác",
+            //   path: "/partner",
+            // },
             {
               name: "Thư viện ảnh",
               path: "/prize",
