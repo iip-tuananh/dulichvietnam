@@ -81,8 +81,8 @@
                   <li><span>Address:</span> {{$setting->address1}}</li>
                   <li><span>Email:</span> <a href="mailto:{{$setting->email}}" title="{{$setting->email}}">{{$setting->email}}</a></li>
                   <li><span>Hotline:</span> <a href="tel:{{$setting->phone1}}" title="{{$setting->phone1}}">{{$setting->phone1}}</a></li>
-                  <li><span>Phone:</span> <a href="tel:{{$setting->phone2}}" title="{{$setting->phone2}}">{{$setting->phone2}}</a></li>
-                  <li><span>Zalo:</span> <a href="https://zalo.me/{{$setting->phone1}}">{{$setting->phone1}}</a></li>
+                  {{-- <li><span>Phone:</span> <a href="tel:{{$setting->phone2}}" title="{{$setting->phone2}}">{{$setting->phone2}}</a></li>
+                  <li><span>Zalo:</span> <a href="https://zalo.me/{{$setting->phone1}}">{{$setting->phone1}}</a></li> --}}
                   {{-- <li>Giấy phép kinh doanh số 0000000000 do sở KH&ĐT TP Đà Nẵng cấp ngày 00/00/0000</li> --}}
                </ul>
                <div class="footer-payment">
@@ -125,7 +125,7 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                      <div class="copyright clearfix text-center">
-                        <span>© Copyright <b>{{$setting->company}}</b> <span class="s480-f">|</span> Design By <a href="https://sbtsoftware.vn/" title="SBT" target="_blank" rel="nofollow">SBT</a></span>
+                        <span>© Copyright <b>{{$setting->company}}</b> <span class="s480-f">|</span> Designed By <a href="https://sbtsoftware.vn/" title="SBT" target="_blank" rel="nofollow">SBT</a></span>
                      </div>
                      <div class="back-to-top text-center" title="Lên đầu trang">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15px" height="15px" viewBox="0 0 284.929 284.929" style="enable-background:new 0 0 284.929 284.929;" xml:space="preserve">
