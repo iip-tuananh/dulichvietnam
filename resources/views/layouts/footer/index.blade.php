@@ -79,7 +79,8 @@
                </a>
                <ul class="footer-contact-info">
                   <li><span>Address:</span> {{$setting->address1}}</li>
-                  <li><span>Email:</span> <a href="mailto:{{$setting->email}}" title="{{$setting->email}}">{{$setting->email}}</a></li>
+                  <li><span>Email 1:</span> <a href="mailto:{{$setting->email}}" title="{{$setting->email}}">{{$setting->email}}</a></li>
+                  <li><span>Email 2:</span> <a href="mailto:{{$setting->GA}}" title="{{$setting->GA}}">{{$setting->GA}}</a></li>
                   <li><span>Hotline:</span> <a href="tel:{{$setting->phone1}}" title="{{$setting->phone1}}">{{$setting->phone1}}</a></li>
                   {{-- <li><span>Phone:</span> <a href="tel:{{$setting->phone2}}" title="{{$setting->phone2}}">{{$setting->phone2}}</a></li>
                   <li><span>Zalo:</span> <a href="https://zalo.me/{{$setting->phone1}}">{{$setting->phone1}}</a></li> --}}

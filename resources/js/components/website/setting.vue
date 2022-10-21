@@ -78,12 +78,21 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label>Email</label>
+                  <label>Email 1</label>
                   <vs-input
                     type="text"
                     size="default"
                     class="w-100"
                     v-model="objData.email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Email 2</label>
+                  <vs-input
+                    type="text"
+                    size="default"
+                    class="w-100"
+                    v-model="objData.GA"
                   />
                 </div>
                 <div class="form-group">
@@ -96,21 +105,12 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label>Link Shopee</label>
+                  <label>Google</label>
                   <vs-input
                     type="text"
                     size="default"
                     class="w-100"
                     v-model="objData.google"
-                  />
-                </div>
-                <div class="form-group">
-                  <label>Code Google analytics</label>
-                  <vs-input
-                    type="text"
-                    size="default"
-                    class="w-100"
-                    v-model="objData.GA"
                   />
                 </div>
                 <div class="form-group">
