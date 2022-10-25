@@ -25,6 +25,9 @@ Route::get('/crm', function () {
 //     return view('app');
 // }); 
 Route::get('/','HomeController@home')->name('home')->middleware(checkLanguage::class);
+Route::post('upload-image-product','HomeController@uploadImagePro')->name('uploadImagePro');
+Route::post('delete-image-product','HomeController@deleteImagePro')->name('deleteImagePro');
+Route::post('upload-review-cus','HomeController@uploadReviewCus')->name('uploadReviewCus');
 Route::group(['namespace'=>'Client','middleware' => ['checkLanguage']], function(){
     Route::get('type-product/{id}','PageController@typeproduct');
     Route::get('district/{id}','PageController@district');

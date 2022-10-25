@@ -11,6 +11,214 @@
 @section('css')
 @endsection
 @section('js')
+<script src="{{asset('frontend/js/jquery.ui.widget.js')}}" type="text/javascript"></script>
+<script src="{{asset('frontend/js/jquery.iframe-transport.js')}}" type="text/javascript"></script>
+<script src="{{asset('frontend/js/jquery.fileupload.js')}}" type="text/javascript"></script>
+<script src="https://cdn.tiny.cloud/1/izjaaarfloqy7atb198pws5iop2okp8e13xpwis8rej692kx/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+      <script>
+      var editor_config = {
+         path_absolute : "/",
+         selector: 'textarea.my-editor',
+         height: 200,
+         relative_urls: false,
+         plugins: [
+            "advlist autolink lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime nonbreaking save table directionality",
+            "emoticons template paste textpattern","toc",
+         ],
+         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | print preview media | forecolor backcolor emoticons | toc ",
+         file_picker_callback : function(callback, value, meta) {
+            var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+            var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+      
+            var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
+            if (meta.filetype == 'image') {
+            cmsURL = cmsURL + "&type=Images";
+            } else {
+            cmsURL = cmsURL + "&type=Files";
+            }
+      
+            tinyMCE.activeEditor.windowManager.openUrl({
+            url : cmsURL,
+            title : 'Filemanager',
+            width : x * 0.8,
+            height : y * 0.8,
+            resizable : "yes",
+            close_previous : "no",
+            onMessage: (api, message) => {
+               callback(message.content);
+            }
+            });
+         }
+      };
+      tinymce.init(editor_config);
+      </script>
+   <script>
+      $('.slide-reviewcus').owlCarousel({
+         loop:true,
+         margin:10,
+         nav:true,
+         responsive:{
+            0:{
+                  items:1
+            },
+            600:{
+                  items:2
+            },
+            1000:{
+                  items:3
+            }
+         }
+      })
+   </script>
+   <script>
+      $('.click-here-review').on('click', function(){
+         $('#form-review-cus').show();
+         $('.close-here-review').show();
+         $('.click-here-review').hide();
+      })
+      $('.close-here-review').on('click', function(){
+         $('#form-review-cus').hide();
+         $('.close-here-review').hide();
+         $('.click-here-review').show();
+      })
+   </script>
+   <script>
+      /*jslint unparam: true */
+      /*global window, $ */
+   
+      var max_uploads = 1
+   
+      $(function () {
+         'use strict';
+   
+         // Change this to the location of your server-side upload handler:
+         var url = $('#fileuploadavatar').data('url');
+         $('#fileuploadavatar').fileupload({
+            url: url,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            dataType: 'html',
+            done: function (e, data) {
+   
+                  if(data['result'] == 'FAILED'){
+                     alert('Invalid File');
+                  }else{
+                     $('#uploaded_file_name').val(data['result']);
+                     $('#uploaded_images').html('<div class="uploaded_image"> <input type="text" value="/uploads/images/'+data['result']+'" name="avatar" id="uploaded_image_name" hidden> <img src="/uploads/images/'+data['result']+'" /> <a href="#" class="img_rmv btn"><i class="fa fa-times-circle"></i></a> </div>');
+   
+                     if($('.uploaded_image').length >= max_uploads){
+                        $('#select_file').hide();
+                     }else{
+                        $('#select_file').show();
+                     }
+                  }
+   
+                  $('#progress .progress-bar').css(
+                     'width',
+                     0 + '%'
+                  );
+   
+                  $.each(data.result.files, function (index, file) {
+                     $('<p/>').text(file.name).appendTo('#files');
+                  });
+   
+            },
+            progressall: function (e, data) {
+                  var progress = parseInt(data.loaded / data.total * 100, 10);
+                  $('#progress .progress-bar').css(
+                     'width',
+                     progress + '%'
+                  );
+            }
+         }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+      });
+   
+      $( "#uploaded_images" ).on( "click", ".img_rmv", function(e) {
+         e.preventDefault();
+         var avatar = $(this).parent().find('input[name=avatar]').val();
+         var urlDelete = $('#uploaded_images').data('url');
+         // console.log(avatar);
+         $.ajax({
+            type: 'post',
+            url: urlDelete,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {
+               avatar :avatar
+            },
+            success: function(data) {
+
+            }
+         })
+         $(this).parent().remove();
+         if($('.uploaded_image').length > max_uploads){
+            $('#select_file').hide();
+         }else{
+            $('#select_file').show();
+         }
+      });
+   </script>
+   <script>
+      $('.submit-review-cus').click(function(e) {
+         e.preventDefault();
+         var url = $(this).data('url');
+         var name = $('#form-review-cus').find("input[name=name]").val();
+         var phone = $('#form-review-cus').find("input[name=phone]").val();
+         var email = $('#form-review-cus').find("input[name=email]").val();
+         var avatar = $('#form-review-cus').find("input[name=avatar]").val();
+         var position = $('#form-review-cus').find("input[name=position]").val();
+         var content = tinymce.get("my-editor").getContent();
+         $.ajax({
+            type: 'post',
+            url: url,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {
+               name: [
+                  {
+                  lang_code: "vi",
+                  content: name,
+               },
+               ],
+               phone: phone,
+               email: email,
+               position: [
+                        {
+                  lang_code: "vi",
+                  content: position,
+               },
+               ],
+               avatar: avatar,
+               content: [
+                        {
+                  lang_code: "vi",
+                  content: content,
+               },
+               ],
+               status: 1
+            },
+            success: function(data) {
+               $('#review-customer').html(data.html);
+               $('.slide-reviewcus').owlCarousel({
+                  loop:true,
+                  margin:10,
+                  nav:true,
+                  responsive:{
+                     0:{
+                           items:1
+                     },
+                     600:{
+                           items:2
+                     },
+                     1000:{
+                           items:3
+                     }
+                  }
+               })
+            }
+         })
+      })
+   </script>
 @endsection
 @section('content')
 <section class="awe-section-1">
@@ -39,60 +247,6 @@
          </div>
       @endforeach
    </div>
-   {{-- <div class="evo-tour-search-index">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 evo-tour-search-title">
-               <h2>Đặt Tour du lịch!</h2>
-               <p>Hơn 300 tours du lịch ở Việt Nam và Quốc tế</p>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-lg-12">
-               <div class="evo-main-search">
-                  <div class="row">
-                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="input_group group_a">
-                           <img src="https://bizweb.dktcdn.net/100/372/532/themes/744930/assets/place-localizer.svg?1663906214480" alt="Địa điểm" />
-                           <input type="text" aria-label="Bạn muốn đi đâu?" autocomplete="off" placeholder="Bạn muốn đi đâu?" id="name" class="form-control form-hai form-control-lg" />
-                        </div>
-                     </div>
-                     <div class="col-lg-5 col-md-5 col-sm-5 col-12 fix-ipad1">
-                        <div class="group-search abs">
-                           <div class="group-search-icon">
-                              <img src="https://bizweb.dktcdn.net/100/372/532/themes/744930/assets/date.svg?1663906214480" alt="Tìm kiếm" />
-                           </div>
-                           <div class="group-search-content">
-                              <p>Ngày khởi hành</p>
-                              <input class="tourmaster-datepicker" id="dates" type="text" placeholder="Chọn Ngày khởi hành" data-date-format="dd MM yyyy" readonly="readonly" />
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-lg-5 col-md-5 col-sm-5 col-12 fix-ipad2">
-                        <div class="group-search ab">
-                           <div class="group-search-icon">
-                              <img src="https://bizweb.dktcdn.net/100/372/532/themes/744930/assets/paper-plane.svg?1663906214480" alt="Tìm kiếm" />
-                           </div>
-                           <div class="group-search-content">
-                              <p>Khởi hành từ</p>
-                              <select name="garden" class="tag-select" required>
-                                 <option value="">Tất cả</option>
-                                 <option value="product_type:('Hồ Chí Minh')">Hồ Chí Minh</option>
-                                 <option value="product_type:('Sài Gòn')">Sài Gòn</option>
-                                 <option value="product_type:('TP. Huế')">TP. Huế</option>
-                              </select>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-lg-2 col-md-2 col-sm-2 col-12 fix-ipad">
-                        <button class="hs-submit btn-style btn btn-default btn-blues" aria-label="Tìm">Tìm</button>	
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div> --}}
 </section>
 <section class="awe-section-2">
    <div class="section_tour_policy">
@@ -308,13 +462,6 @@
                      @endforeach
                   </div>
                </div>
-               {{-- <div class="row">
-                  <div class="col-lg-12">
-                     <div class="evo-index-tour-more">
-                        <a href="{{route('allListBlog')}}" title="View All">View All</a>
-                     </div>
-                  </div>
-               </div> --}}
             </div>
          </div>
       </div>
@@ -352,7 +499,7 @@
                </div>
             </div>
          </div>
-         <div class="row mt-3">
+         <div class="row mt-3" id="review-customer">
             <div class="slide-reviewcus owl-carousel owl-theme">
                @foreach ($reviewCus as $review)
                <div class="item">
@@ -370,25 +517,171 @@
                @endforeach
             </div>
          </div>
+         <div class="row">
+            <button class="click-here-review">Click here, if you want commnet !!!</button>
+            <button class="close-here-review">Close comment</button>
+         </div>
+         <div id="form-review-cus">
+            <div class="row" >
+                  <div class="col-md-8">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <fieldset class="form-group">
+                              <input type="text" class="form-control" value="{{ old('name') }}" name="name" id="lastName"  placeholder="Your Full Name" required >
+                              <p id="error-name" class="error"></p>
+                           </fieldset>
+                           <fieldset class="form-group">
+                              <input type="text" class="form-control" value="{{ old('position') }}" name="position" id="lastName"  placeholder="Your Position" required >
+                              <p id="error-position" class="error"></p>
+                           </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                           <fieldset class="form-group">
+                              <input type="text" class="form-control" value="{{ old('email') }}" name="email" id="lastName"  placeholder="Your Email Address" required >
+                              <p id="error-email" class="error"></p>
+                           </fieldset>
+                           <fieldset class="form-group">
+                              <input type="text" class="form-control" value="{{ old('phone') }}" name="phone" id="lastName"  placeholder="Your Phone Number" required >
+                              <p id="error-phone" class="error"></p>
+                           </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                           <fieldset class="form-group">
+                              <textarea class="my-editor" name="content" id="my-editor" cols="30" rows="5" placeholder="Your Feedback Content" required ></textarea>
+                              <p id="error-content" class="error"></p>
+                           </fieldset>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <fieldset class="form-group">
+                        <div class="load-img">
+                           <div id="uploaded_images" data-url="{{route('deleteImagePro')}}">
+                              
+                           </div>
+                        </div>
+                        <br>
+                        <div id="select_file">
+                           <div class="form-group">
+                              <label for="fileuploadavatar">
+                                 <span class="plus-icon" aria-hidden="true"><span>Click for upload image</span></span>
+                                 <input id="fileuploadavatar" type="file" name="files" accept="image/x-png, image/gif, image/jpeg" data-url="{{route('uploadImagePro')}}" title="Picture" style="display:none">
+                              </label>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <button type="submit" class=" submit-review-cus" data-url="{{route('uploadReviewCus')}}">Submit</button>
+                  </div>
+               
+            </div>
+         </div>
       </div>
    </div>
-   <script>
-      $('.slide-reviewcus').owlCarousel({
-         loop:true,
-         margin:10,
-         nav:true,
-         responsive:{
-            0:{
-                  items:1
-            },
-            600:{
-                  items:2
-            },
-            1000:{
-                  items:3
-            }
-         }
-      })
-   </script>
+   <style>
+      #form-review-cus {
+         display: none;
+      }
+      #form-review-cus .form-control{
+         border-radius: 10px;
+         height: 45px; 
+      }
+      #form-review-cus .tox-tinymce{
+         border-radius: 10px; 
+      }
+      .close-here-review {
+         display: none;
+      }
+      .click-here-review, .close-here-review, .submit-review-cus {
+         padding: 10px 20px;
+         border-radius: 20px;
+         background-color: #1ba0e2;
+         border: none;
+         margin-bottom: 20px;
+         color: #ffff;
+      }
+      .load-img {
+         position: relative;
+         /* border: 1px dashed gray; */
+         height: 250px;
+         background-color: white;
+         padding: 20px;
+      }
+      .load-img img{
+         width: 100%;
+         height: 210px;
+         border-radius: 10px;
+      }
+      .load-img:hover .img_rmv{
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 248px;
+         background-color: #ffffff4a;
+      }
+      .load-img:hover .img_rmv i{
+         font-size: 48px;
+         color: #fff;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         z-index: 1;
+      }
+      .img_rmv i{
+         font-size: 48px;
+         color: #fff;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         z-index: -1;
+      }
+      #fileuploadavatar {
+         height: 250px;
+         display: grid;
+         width: 95%;
+         cursor: pointer;
+         padding: 0;
+         position: absolute;
+         /* bottom: 66%; */
+         /* left: 40%; */
+         top: 26px;
+         border: none;
+      }
+      .plus-icon::before {
+         font-family: "Font Awesome 5 Free";
+         content: "";
+         display: inline-block;
+         border-radius: 3px;
+         padding: 5px 8px;
+         outline: none;
+         white-space: nowrap;
+         -webkit-user-select: none;
+         cursor: pointer;
+         font-weight: 700;
+         font-size: 40px;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+      }
+      .plus-icon {
+         position: absolute;
+         top: 18px;
+         left: 22px;
+         width: 89%;
+         height: 215px;
+         border: 1px dashed gray;
+         border-radius: 10px;
+      }
+      .plus-icon span{
+         position: absolute;
+         top: 65%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         opacity: 0.6;
+      }
+   </style>
 </section>
 @endsection

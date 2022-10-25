@@ -282,7 +282,7 @@
                            <span class="special-price">Price:
                            <span class="price product-price">{{$discountPrice}} USD</span>
                            </span> <!-- Giá Khuyến mại -->
-                           <span class="save-price">Tiết kiệm
+                           <span class="save-price">Sale
                            <span class="price product-price-save">-{{$product->discount}}%</span>
                         </span> <!-- Tiết kiệm -->
                         @else

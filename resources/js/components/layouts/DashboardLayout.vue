@@ -244,7 +244,7 @@ export default {
           route_name: "",
           sub: [
             {
-              name: "Danh sách dịch vụ",
+              name: "Danh sách",
               path: "/reviewCus",
             }
           ],

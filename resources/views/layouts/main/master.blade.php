@@ -41,8 +41,11 @@
       <link href="{{asset('frontend/css/owl.theme.default.min.css')}}" rel="stylesheet" type="text/css" />
       <link href="{{asset('frontend/css/callbuttom.css')}}" rel="stylesheet" type="text/css" />
       @yield('css')
+      {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
       <link rel="preload" as="script" href="{{asset('frontend/js/jquery.js')}}" />
       <script src="{{asset('frontend/js/jquery.js')}}" type="text/javascript"></script>
+
       <script src="{{asset('frontend/js/owl.carousel.min.js')}}" type="text/javascript"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <script>
@@ -71,29 +74,31 @@
       <script src="{{asset('frontend/js/api.jquery.js')}}" type="text/javascript"></script>
       <link rel="preload" as="script" href="{{asset('frontend/js/evo-index-js.js')}}" />
       <script src="{{asset('frontend/js/evo-index-js.js')}}" type="text/javascript"></script>
+      
+      {{-- //js gg translate --}}
       <script type="text/javascript" 
       src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-   </script>
-   <script type="text/javascript">
-      function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages:'en,vi', 
-      }, 'translate_select');
-      }
-   </script>
-   <script>
-      var flags = document.getElementsByClassName('flag_link');
-      Array.prototype.forEach.call(flags, function(e){
-      e.addEventListener('click', function(){
-      var lang = e.getAttribute('data-lang'); 
-      var languageSelect = document.querySelector("select.goog-te-combo");
-      // console.log(document.querySelector("select.goog-te-combo"));
-      languageSelect.value = lang; 
-      languageSelect.dispatchEvent(new Event("change"));
-      }); 
-      });
-   </script>
+      </script>
+      <script type="text/javascript">
+         function googleTranslateElementInit() {
+         new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages:'en,vi', 
+         }, 'translate_select');
+         }
+      </script>
+      <script>
+         var flags = document.getElementsByClassName('flag_link');
+         Array.prototype.forEach.call(flags, function(e){
+         e.addEventListener('click', function(){
+         var lang = e.getAttribute('data-lang'); 
+         var languageSelect = document.querySelector("select.goog-te-combo");
+         // console.log(document.querySelector("select.goog-te-combo"));
+         languageSelect.value = lang; 
+         languageSelect.dispatchEvent(new Event("change"));
+         }); 
+         });
+      </script>
    <style type="text/css">
       .image-item .flag_link img{
          width: 30px;

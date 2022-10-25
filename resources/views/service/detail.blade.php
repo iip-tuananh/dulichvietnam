@@ -9,143 +9,78 @@
 {{url(''.$detail_service->image)}}
 @endsection
 @section('css')
-<link href="{{asset('frontend/css/blog_article_style.scss.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{asset('frontend/css/sidebar_style.scss.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/evo-article.scss.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 @section('js')
 @endsection
 @section('content')
-<section class="bread-crumb" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url({{$detail_service->image}});">
-	<span class="crumb-border"></span>
+<section class="bread-crumb margin-bottom-10">
 	<div class="container">
-	<div class="rows">
-		<div class="col-xs-12 a-left">
-			<p class="title_h1 clearfix">
-				{{($detail_service->name)}}
-			</p>
-			<ul class="breadcrumb" >
-				<li class="home">
-				<a  href="{{route('home')}}" ><span >Trang chủ</span></a>						
-				<span class="mr_lr">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
-				</li>
-				<li >
-				<a  href="{{route('allListBlog')}}"><span >Chính sách phân phối</span></a>	
-				<span class="mr_lr">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
-				</li>
-				<li><strong><span >{{($detail_service->name)}}</span></strong></li>
-			</ul>
-		</div>
-	</div>
+	<ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+		<li class="home" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a itemprop="item" href="{{route('home')}}" title="Home">
+				<span itemprop="name">Home</span>
+				<meta itemprop="position" content="1" />
+			</a>
+		</li>
+		<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a itemprop="item" href="#" title="Blogs">
+				<span itemprop="name">Travel Service</span>
+				<meta itemprop="position" content="2" />
+			</a>
+		</li>
+		<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<strong itemprop="name">{{($detail_service->name)}}</strong>
+			<meta itemprop="position" content="3" />
+		</li>
+	</ul>
 	</div>
 </section>
-<section class="blogpage clearfix">
-	<div class="container article-wraper" itemscope itemtype="https://schema.org/Article">
-	<div class="wrap_background_aside padding-top-0 margin-bottom-40 clearfix">
+<div class="container article-wraper margin-top-20 margin-bottom-20">
+	<div class="row">
+	<section class="right-content col-md-12 col-lg-9">
 		<article class="article-main">
 			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="article-details clearfix">
-					<h1 class="article-title clearfix">{{($detail_service->name)}}</h1>
-					<div class="post-date">
-						<span>{{date_format($detail_service->created_at,'d-m-Y')}}</span>
-					</div>
-					<div class="article-content clearfix">
-						<div class="rte">
-							{!!languageName($detail_service->content)!!}
-						</div>
-					</div>
+				<div class="col-md-12 evo-article margin-bottom-10">
+				<h1 class="title-head">{{($detail_service->name)}}</h1>
+				<div class="article-details evo-toc-content">
+					{!!languageName($detail_service->content)!!}
 				</div>
-				<div class="section clearfix">
-					<div class="social-sharing clearfix">
-						<span>Chia sẻ bài viết:</span>
-						<!-- Go to www.addthis.com/dashboard to customize your tools -->
-						<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58589c2252fc2da4"></script>
-						<div class="addthis_inline_share_toolbox"></div>
-					</div>
 				</div>
-				<div class="section bloglq clearfix">
-					<h2>
-						<a href="#" title="Tin liên quan">Chính sách khác</a>
-					</h2>
-					<div class="section owlnav_style1">
-						<div class="slickblog">
-							@foreach ($services as $service)
-							@if ($service->id != $detail_service->id)
-								<div class="item">
-								<div class="blogwp clearfix">
-									<a  class="image-blog clearfix" href="{{route('serviceDetail', ['slug'=>$service->slug])}}" title="{{$service->name}}">
-									<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{$service->image}}"  alt="{{$service->name}}">
-									</a>
-									<div class="post-date clearfix"> 
-										{!!languageName($service->description)!!}
-									</div>
-									<h3>
-										<a href="{{route('serviceDetail', ['slug'=>$service->slug])}}" title="{{$service->name}}">{{$service->name}}</a>
-									</h3>
-								</div>
-								</div>
-							@endif
-							@endforeach
-						</div>
-					</div>
+				<div class="col-md-12 margin-bottom-10 fix-ar">
 				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-12 margin-bottom-10">
+				<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a099baca270babc"></script>
+				<div class="addthis_inline_share_toolbox_0gnu"></div>
 				</div>
 			</div>
 		</article>
+	</section>
+	<aside class="evo-toc-sidebar evo-sidebar sidebar left-content col-md-12 col-lg-3 margin-top-15">
+		<aside class="aside-item top-news margin-top-20">
+		<div class="aside-title">
+			<h3 class="title-head margin-top-0"><a href="tin-tuc" title="FAVORITE ARTICLE">FAVORITE ARTICLE</a></h3>
+		</div>
+		@foreach ($hotBlogs as $blog)
+		<article class="item clearfix">
+			<a href="{{route('detailBlog', ['slug'=>$blog->slug])}}" title="{{languageName($blog->title)}}" class="thumb">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{$blog->image}}" alt="{{languageName($blog->title)}}" class="lazy img-responsive center-block" loading="lazy" />
+			</a>
+			<div class="info">
+				<h4 class="title usmall"><a href="{{route('detailBlog', ['slug'=>$blog->slug])}}" title="{{languageName($blog->title)}}">{{languageName($blog->title)}}</a></h4>
+			</div>
+		</article>
+		@endforeach
+		</aside>
+		@if (isset($$bannerAds[2]))
+		<aside class="aside-item blog-banner margin-top-30">
+		<a href="{{$bannerAds[2]->name}}" title="" class="single_image_effect">
+		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{$bannerAds[2]->image}}" alt="" class="lazy img-responsive mx-auto d-block" loading="lazy" />
+		</a>
+		</aside>
+		@endif
+	</aside>
 	</div>
-	</div>
-</section>
-<style>
-	.post-date{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 3; 
-	-webkit-box-orient: vertical;
-	}
-</style>
-<script>
-	$(document).ready(function ($) {
-		$('.slickblog').slick({
-			autoplay: true,
-			autoplaySpeed: 6000,
-			dots: false,
-			arrows: false,
-			infinite: false,
-			speed: 300,
-			slidesToShow: 4,
-			slidesToScroll: 4,
-			responsive: [
-				{
-					breakpoint: 1200,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 4
-					}
-				},
-				{
-					breakpoint: 1024,
-					settings: {
-						slidesToShow: 3,
-						slidesToScroll: 3
-					}
-				},
-				{
-					breakpoint: 991,
-					settings: {
-						slidesToShow: 2,
-						slidesToScroll: 2
-					}
-				},
-				{
-					breakpoint: 767,
-					settings: {
-						slidesToShow: 1,
-						slidesToScroll: 1
-					}
-				}
-			]
-		});
-	});
-</script>
+</div>
 @endsection
