@@ -255,7 +255,7 @@
             </div>
             <div class="product-bg-white evo-tour-main-content">
                <div id="tour-schedule" class="evo-tour-block">
-                  <div class="tour-schedule-title">Detail Tour</div>
+                  <div class="tour-schedule-title">Detailed information</div>
                   <div class="rte">
                      {!!languageName($product->content)!!}
                   </div>
