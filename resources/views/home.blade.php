@@ -518,7 +518,7 @@
             </div>
          </div>
          <div class="row">
-            <button class="click-here-review">Click here, if you want comment !!!</button>
+            <button class="click-here-review">Please, leave your comments here. Thank you !!!</button>
             <button class="close-here-review">Close comment</button>
          </div>
          <div id="form-review-cus">
