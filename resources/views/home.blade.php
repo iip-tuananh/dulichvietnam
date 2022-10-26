@@ -340,14 +340,18 @@
       <div class="container">
          <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-12 banner-top">
+               @if (isset($bannerAds[0]))
                <a href="{{$bannerAds[0]->name}}" title="" target="_blank">
                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{$bannerAds[0]->image}}" alt="" class="lazy img-responsive mx-auto d-block" loading="lazy" />
                </a>
+               @endif
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+               @if (isset($bannerAds[1]))
                <a href="{{$bannerAds[1]->name}}" title="" target="_blank">
                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{$bannerAds[1]->image}}" alt="" class="lazy img-responsive mx-auto d-block" loading="lazy" />
                </a>
+               @endif
             </div>
          </div>
       </div>
