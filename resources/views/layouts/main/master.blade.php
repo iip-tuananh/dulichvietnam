@@ -29,6 +29,7 @@
       <meta name="twitter:title" content="@yield('title')" />
       <meta name="twitter:description" content="@yield('description')" />
       <meta name="twitter:image" content="@yield('image')" />
+      <meta name="google-site-verification" content="sMWsnNB2ZaZUwFC6cDCKmvDFuIFZF1G3im6th_2ZmcI" />
       <!-- Fav Icon -->
       <link rel="icon" href="{{url(''.$setting->favicon)}}" type="image/x-icon">
       <link rel="preload" as="style" type="text/css" href="{{asset('frontend/css/bootstrapmin.css')}}" />
@@ -41,7 +42,6 @@
       <link href="{{asset('frontend/css/owl.theme.default.min.css')}}" rel="stylesheet" type="text/css" />
       <link href="{{asset('frontend/css/callbuttom.css')}}" rel="stylesheet" type="text/css" />
       @yield('css')
-      {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
       <link rel="preload" as="script" href="{{asset('frontend/js/jquery.js')}}" />
       <script src="{{asset('frontend/js/jquery.js')}}" type="text/javascript"></script>
